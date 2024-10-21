@@ -6,7 +6,7 @@ from git import Repo
 # Configuration
 GITHUB_USERNAME = 'AlexDev404'
 GITHUB_TOKEN = 'ghp_XXXXXXXXXXXXXXXXXXXXXXXXXX'  # Create a personal access token from GitHub settings with scope "repo"
-BASE_DIR = 'E:/Data/PROGRAMMING/Qt/'  # Directory with all your local Git repos
+BASE_DIR = '.'  # Directory with all your local Git repos
 GITHUB_API_URL = 'https://api.github.com'
 
 
