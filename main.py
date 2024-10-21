@@ -5,9 +5,28 @@ from git import Repo
 
 # Configuration
 GITHUB_USERNAME = 'AlexDev404'
-GITHUB_TOKEN = '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'  # Create a personal access token from GitHub settings with scope "repo"
+GITHUB_TOKEN = 'ghp_XXXXXXXXXXXXXXXXXXXXXXXXXX'  # Create a personal access token from GitHub settings with scope "repo"
 BASE_DIR = 'E:/Data/PROGRAMMING/Qt/'  # Directory with all your local Git repos
 GITHUB_API_URL = 'https://api.github.com'
+
+
+# Helper function to delete a repository on GitHub
+def delete_github_repo(repo_name):
+    url = f'{GITHUB_API_URL}/repos/{GITHUB_USERNAME}/{repo_name}'
+    headers = {
+        'Authorization': f'token {GITHUB_TOKEN}',
+        'Accept': 'application/vnd.github.v3+json',
+    }
+
+    response = requests.delete(url, headers=headers)
+
+    if response.status_code == 204:
+        print(f'Successfully deleted GitHub repo: {repo_name}')
+    elif response.status_code == 404:
+        print(f'Repo {repo_name} not found on GitHub. Skipping deletion.')
+    else:
+        print(f'Error deleting repo {repo_name}: {response.text}')
+
 
 # Helper function to create a repository on GitHub
 def create_github_repo(repo_name, is_private=True):
@@ -43,9 +62,20 @@ def push_to_github(repo_path, repo_name):
             origin = repo.create_remote('origin', remote_url)
             print(f'Created remote at {remote_url}')
 
+        # Add the files
+        repo.git.add(all=True)
+
+        # Commit the files
+        repo.index.commit("Initial commit")
+
         # Push to GitHub
         origin.push(refspec='refs/heads/*:refs/heads/*')
         print(f'Successfully pushed {repo_name} to GitHub.')
+        # delete_github_repo(repo_name)
+        # # Remove all remotes before adding the new one
+        # for remote in repo.remotes:
+        #     repo.delete_remote(remote)
+        #     print(f'Remote {remote.name} removed.')
     except git.exc.GitCommandError as e:
         print(f'Error pushing {repo_name}: {e}')
 
