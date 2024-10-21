@@ -5,7 +5,8 @@ from git import Repo
 
 # Configuration
 GITHUB_USERNAME = 'AlexDev404'
-GITHUB_TOKEN = 'ghp_XXXXXXXXXXXXXXXXXXXXXXXXXX'  # Create a personal access token from GitHub settings with scope "repo"
+# The below token is invalid, so don't even think of trying it
+GITHUB_TOKEN = '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'  # Create a personal access token from GitHub settings with scope "repo"
 BASE_DIR = '.'  # Directory with all your local Git repos
 GITHUB_API_URL = 'https://api.github.com'
 
